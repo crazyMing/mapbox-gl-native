@@ -16,6 +16,7 @@
 #include "../conversion/url_or_tileset.hpp"
 
 #include <string>
+#include <mbgl/util/shared_thread_pool.hpp>
 
 namespace mbgl {
 namespace android {
@@ -40,13 +41,14 @@ namespace android {
         : Source(env, std::make_unique<mbgl::style::GeoJSONSource>(
                 jni::Make<std::string>(env, sourceId),
                 convertGeoJSONOptions(env, options))
-            ) {
+            ), converter(std::make_unique<Actor<FeatureConverter>>(*sharedThreadPool())) {
     }
 
     GeoJSONSource::GeoJSONSource(jni::JNIEnv& env,
                                  mbgl::style::Source& coreSource,
                                  AndroidRendererFrontend& frontend)
-            : Source(env, coreSource, createJavaPeer(env), frontend) {
+            : Source(env, coreSource, createJavaPeer(env), frontend)
+            , converter(std::make_unique<Actor<FeatureConverter>>(*sharedThreadPool())) {
     }
 
     GeoJSONSource::~GeoJSONSource() = default;
@@ -67,13 +69,16 @@ namespace android {
     }
 
     void GeoJSONSource::setFeatureCollection(jni::JNIEnv& env, jni::Object<geojson::FeatureCollection> jFeatures) {
-        using namespace mbgl::android::geojson;
+        callback = std::make_unique<Actor<FeatureConverter::Callback>>(
+                *Scheduler::GetCurrent(),
+                [this](GeoJSON geoJSON) {
+                    // Update the core source
+                    source.as<mbgl::style::GeoJSONSource>()->GeoJSONSource::setGeoJSON(geoJSON);
+                    collectionRef.release();
+                });
 
-        // Convert the jni object
-        auto features = FeatureCollection::convert(env, jFeatures);
-
-        // Update the core source
-        source.as<mbgl::style::GeoJSONSource>()->GeoJSONSource::setGeoJSON(GeoJSON(features));
+        collectionRef = jFeatures.NewGlobalRef(env);
+        converter->self().invoke(&FeatureConverter::convertFeatureCollection, *collectionRef, callback->self());
     }
 
     void GeoJSONSource::setFeature(jni::JNIEnv& env, jni::Object<geojson::Feature> jFeature) {
@@ -145,6 +150,16 @@ namespace android {
             METHOD(&GeoJSONSource::getURL, "nativeGetUrl"),
             METHOD(&GeoJSONSource::querySourceFeatures, "querySourceFeatures")
         );
+    }
+
+    void FeatureConverter::convertFeatureCollection(jni::Object<geojson::FeatureCollection> jFeatures,
+                                                    ActorRef<FeatureConverter::Callback> callback) {
+        using namespace mbgl::android::geojson;
+
+        android::UniqueEnv _env = android::AttachEnv();
+        // Convert the jni object
+        auto features = FeatureCollection::convert(*_env, jFeatures);
+        callback.invoke(&FeatureConverter::Callback::operator(), GeoJSON(features));
     }
 
 } // namespace android

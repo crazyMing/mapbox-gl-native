@@ -10,6 +10,12 @@
 namespace mbgl {
 namespace android {
 
+class FeatureConverter {
+public:
+    using Callback = std::function<void (GeoJSON)>;
+    void convertFeatureCollection(jni::Object<geojson::FeatureCollection>, ActorRef<Callback>);
+};
+
 class GeoJSONSource : public Source {
 public:
 
@@ -42,6 +48,9 @@ public:
 
 private:
     jni::Object<Source> createJavaPeer(jni::JNIEnv&);
+    jni::UniqueObject<geojson::FeatureCollection> collectionRef;
+    std::unique_ptr<Actor<FeatureConverter::Callback>> callback;
+    std::unique_ptr<Actor<FeatureConverter>> converter;
 
 }; // class GeoJSONSource
 
