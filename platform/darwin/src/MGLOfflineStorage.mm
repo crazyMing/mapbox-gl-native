@@ -30,8 +30,6 @@ const MGLOfflinePackUserInfoKey MGLOfflinePackUserInfoKeyProgress = @"Progress";
 const MGLOfflinePackUserInfoKey MGLOfflinePackUserInfoKeyError = @"Error";
 const MGLOfflinePackUserInfoKey MGLOfflinePackUserInfoKeyMaximumCount = @"MaximumCount";
 
-NSString * const MGLUnsupportedRegionTypeException = @"MGLUnsupportedRegionTypeException";
-
 @interface MGLOfflineStorage ()
 
 @property (nonatomic, strong, readwrite) NSMutableArray<MGLOfflinePack *> *packs;

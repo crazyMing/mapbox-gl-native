@@ -25,12 +25,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 // TODO: Can this be removed? Appears to be for Xcode 7 compat.
 // https://github.com/mapbox/mapbox-gl-native/pull/6923
-#ifndef NS_STRING_ENUM
-    #define NS_STRING_ENUM
-    #define NS_EXTENSIBLE_STRING_ENUM
-    typedef NSString *NSErrorDomain;
-    typedef NSString *NSNotificationName;
-#endif
+//#ifndef NS_STRING_ENUM
+//    #define NS_STRING_ENUM
+//    #define NS_EXTENSIBLE_STRING_ENUM
+//    typedef NSString *NSErrorDomain;
+//    typedef NSString *NSNotificationName;
+//#endif
 
 typedef NSString *MGLExceptionName NS_EXTENSIBLE_STRING_ENUM;
 

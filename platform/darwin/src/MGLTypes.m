@@ -1,19 +1,19 @@
 #import "MGLTypes.h"
 
-NSString * const MGLAbstractClassException = @"MGLAbstractClassException";
-NSString * const MGLInvalidStyleLayerException = @"MGLInvalidStyleLayerException";
-NSString * const MGLRedundantLayerException = @"MGLRedundantLayerException";
-NSString * const MGLRedundantSourceException = @"MGLRedundantSourceException";
-NSString * const MGLInvalidDatasourceException = @"MGLInvalidDatasourceException";
-NSString * const MGLBundleNotFoundException = @"MGLBundleNotFoundException";
-NSString * const MGLInvalidOfflinePackException = @"MGLInvalidOfflinePackException";
-NSString * const MGLUnsupportedRegionTypeException = @"MGLUnsupportedRegionTypeException";
-NSString * const MGLUnavailableMethodException = @"MGLUnavailableMethodException";
-NSString * const MGLInvalidStyleURLException = @"MGLInvalidStyleURLException";
-NSString * const MGLRedundantSourceIdentifierException = @"MGLRedundantSourceIdentifierException";
-NSString * const MGLRedundantLayerIdentifierException = @"MGLRedundantLayerIdentifierException";
-NSString * const MGLMissingLocationServicesUsageDescriptionException = @"MGLMissingLocationServicesUsageDescriptionException";
-NSString * const MGLUserLocationAnnotationTypeException = @"MGLUserLocationAnnotationTypeException";
-NSString * const MGLResourceNotFoundException = @"MGLResourceNotFoundException";
+const MGLExceptionName MGLAbstractClassException = @"MGLAbstractClassException";
+const MGLExceptionName MGLInvalidStyleLayerException = @"MGLInvalidStyleLayerException";
+const MGLExceptionName MGLRedundantLayerException = @"MGLRedundantLayerException";
+const MGLExceptionName MGLRedundantSourceException = @"MGLRedundantSourceException";
+const MGLExceptionName MGLInvalidDatasourceException = @"MGLInvalidDatasourceException";
+const MGLExceptionName MGLBundleNotFoundException = @"MGLBundleNotFoundException";
+const MGLExceptionName MGLInvalidOfflinePackException = @"MGLInvalidOfflinePackException";
+const MGLExceptionName MGLUnsupportedRegionTypeException = @"MGLUnsupportedRegionTypeException";
+const MGLExceptionName MGLUnavailableMethodException = @"MGLUnavailableMethodException";
+const MGLExceptionName MGLInvalidStyleURLException = @"MGLInvalidStyleURLException";
+const MGLExceptionName MGLRedundantSourceIdentifierException = @"MGLRedundantSourceIdentifierException";
+const MGLExceptionName MGLRedundantLayerIdentifierException = @"MGLRedundantLayerIdentifierException";
+const MGLExceptionName MGLMissingLocationServicesUsageDescriptionException = @"MGLMissingLocationServicesUsageDescriptionException";
+const MGLExceptionName MGLUserLocationAnnotationTypeException = @"MGLUserLocationAnnotationTypeException";
+const MGLExceptionName MGLResourceNotFoundException = @"MGLResourceNotFoundException";
 
 NSString * const MGLErrorDomain = @"MGLErrorDomain";
