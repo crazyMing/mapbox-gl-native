@@ -4790,7 +4790,8 @@ public:
                 NSString *suggestedUsageKeys = requiresWhenInUseUsageDescription ?
                     @"NSLocationWhenInUseUsageDescription and (optionally) NSLocationAlwaysAndWhenInUseUsageDescription" :
                     @"NSLocationWhenInUseUsageDescription and/or NSLocationAlwaysUsageDescription";
-                [NSException raise:@"Missing Location Services usage description" format:@"This app must have a value for %@ in its Info.plist.", suggestedUsageKeys];
+                [NSException raise:MGLMissingLocationServicesUsageDescriptionException
+                            format:@"This app must have a value for %@ in its Info.plist.", suggestedUsageKeys];
             }
         }
 
@@ -4827,7 +4828,7 @@ public:
             userLocationAnnotationView = (MGLUserLocationAnnotationView *)[self.delegate mapView:self viewForAnnotation:self.userLocation];
             if (userLocationAnnotationView && ! [userLocationAnnotationView isKindOfClass:MGLUserLocationAnnotationView.class])
             {
-                [NSException raise:@"MGLUserLocationAnnotationTypeException"
+                [NSException raise:MGLUserLocationAnnotationTypeException
                             format:@"User location annotation view must be a kind of MGLUserLocationAnnotationView. %@", userLocationAnnotationView.debugDescription];
             }
         }
@@ -6007,7 +6008,7 @@ public:
 
     if ( ! image)
     {
-        [NSException raise:@"MGLResourceNotFoundException" format:
+        [NSException raise:MGLResourceNotFoundException format:
          @"The resource named “%@” could not be found in the Mapbox framework bundle.", imageName];
     }
 
@@ -6296,8 +6297,8 @@ private:
     NSURL *url = URLString.length ? [NSURL URLWithString:URLString] : nil;
     if (URLString.length && !url)
     {
-        [NSException raise:@"Invalid style URL" format:
-         @"“%@” is not a valid style URL.", URLString];
+        [NSException raise:MGLInvalidStyleURLException
+                    format:@"“%@” is not a valid style URL.", URLString];
     }
     self.styleURL = url;
 }

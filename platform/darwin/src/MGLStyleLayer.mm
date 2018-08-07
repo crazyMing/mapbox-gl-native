@@ -33,7 +33,7 @@
 - (void)addToStyle:(MGLStyle *)style belowLayer:(MGLStyleLayer *)otherLayer
 {
     if (_pendingLayer == nullptr) {
-        [NSException raise:@"MGLRedundantLayerException"
+        [NSException raise:MGLRedundantLayerException
             format:@"This instance %@ was already added to %@. Adding the same layer instance " \
                     "to the style more than once is invalid.", self, style];
     }

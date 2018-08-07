@@ -23,12 +23,32 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+// TODO: Can this be removed? Appears to be for Xcode 7 compat.
+// https://github.com/mapbox/mapbox-gl-native/pull/6923
 #ifndef NS_STRING_ENUM
     #define NS_STRING_ENUM
     #define NS_EXTENSIBLE_STRING_ENUM
     typedef NSString *NSErrorDomain;
     typedef NSString *NSNotificationName;
 #endif
+
+typedef NSString *MGLExceptionName NS_EXTENSIBLE_STRING_ENUM;
+
+FOUNDATION_EXTERN MGLExceptionName const MGLAbstractClassException;
+FOUNDATION_EXTERN MGLExceptionName const MGLInvalidStyleLayerException;
+FOUNDATION_EXTERN MGLExceptionName const MGLRedundantLayerException;
+FOUNDATION_EXTERN MGLExceptionName const MGLRedundantSourceException;
+FOUNDATION_EXTERN MGLExceptionName const MGLInvalidDatasourceException;
+FOUNDATION_EXTERN MGLExceptionName const MGLBundleNotFoundException;
+FOUNDATION_EXTERN MGLExceptionName const MGLInvalidOfflinePackException;
+FOUNDATION_EXTERN MGLExceptionName const MGLUnsupportedRegionTypeException;
+FOUNDATION_EXTERN MGLExceptionName const MGLUnavailableMethodException;
+FOUNDATION_EXTERN MGLExceptionName const MGLInvalidStyleURLException;
+FOUNDATION_EXTERN MGLExceptionName const MGLRedundantSourceIdentifierException;
+FOUNDATION_EXTERN MGLExceptionName const MGLRedundantLayerIdentifierException;
+FOUNDATION_EXTERN MGLExceptionName const MGLMissingLocationServicesUsageDescriptionException;
+FOUNDATION_EXTERN MGLExceptionName const MGLUserLocationAnnotationTypeException;
+FOUNDATION_EXTERN MGLExceptionName const MGLResourceNotFoundException;
 
 /** Indicates an error occurred in the Mapbox SDK. */
 FOUNDATION_EXTERN MGL_EXPORT NSErrorDomain const MGLErrorDomain;

@@ -14,8 +14,8 @@
         if (bundlePath) {
             bundle = [self bundleWithPath:bundlePath];
         } else {
-            [NSException raise:@"MGLBundleNotFoundException" format:
-             @"The Mapbox framework bundle could not be found. If using the Mapbox Maps SDK for iOS as a static framework, make sure that Mapbox.bundle is copied into the root of the app bundle."];
+            [NSException raise:MGLBundleNotFoundException
+                        format:@"The Mapbox framework bundle could not be found. If using the Mapbox Maps SDK for iOS as a static framework, make sure that Mapbox.bundle is copied into the root of the app bundle."];
         }
     }
 
